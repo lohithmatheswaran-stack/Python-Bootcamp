@@ -1,0 +1,12 @@
+city = input("What city were you born in? ")
+pet = input("What pet do you have (or have you had)? ")
+
+band_name = city + " " + pet
+
+print("\nYour band name is:", band_name)
+
+EX: 
+What city were you born in? Phoenix
+What pet do you have (or have you had)? Cat
+
+Your band name is: Phoenix Cat
