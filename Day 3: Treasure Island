@@ -1,0 +1,54 @@
+print("🏝️ Welcome to Treasure Island!")
+print("Your mission is to find the treasure.\n")
+
+name = input("What is your name? ")
+
+print(f"\nAhoy, {name}! May the seas favor ye!")
+
+# 🗺️ X marks the spot... but first, choose a path.
+direction = input("You are at a crossroads. Go left or right? ").lower()
+
+if direction == "left":
+
+    # 🌊 The old map says patience may reveal hidden fortunes.
+    action = input("You arrive at a lake. Wait for a boat or swim? ").lower()
+
+    if action == "wait":
+
+        # 🏴‍☠️ Three doors stand before ye. Only one hides the treasure.
+        door = input(
+            "Choose a door: red, blue, or yellow. "
+        ).lower()
+
+        if door == "yellow":
+            # 💰 The treasure lies beyond the golden path!
+            print(f"🎉 Congratulations, {name}! You found the treasure!")
+        elif door == "red":
+            print("🔥 A fiery trap! Game Over.")
+        elif door == "blue":
+            print("🐊 Hungry beasts await inside. Game Over.")
+        else:
+            print("🚪 That door wasn't on the map. Game Over.")
+
+    elif action == "swim":
+        print("🦈 The waters were cursed with sharks. Game Over.")
+
+    else:
+        print("❌ The map cannot read that choice. Game Over.")
+
+elif direction == "right":
+    # ☠️ Beware! Not every path leads to riches.
+    print("🕳️ You fall into a hidden pit. Game Over.")
+
+else:
+    print("❌ Lost at sea! Game Over.")
+
+# 🦜 Every pirate loves another adventure.
+play_again = input("\nWould you like to play again? (yes/no) ").lower()
+
+if play_again == "yes" or play_again == "y":
+    print("Raise the anchor and restart the voyage!")
+elif play_again == "no":
+    print(f"Fair winds and following seas, Captain {name}!")
+else:
+    print("The parrot couldn't understand your answer.")
