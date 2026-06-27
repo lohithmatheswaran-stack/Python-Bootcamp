@@ -1,0 +1,49 @@
+import random
+import time
+
+moves = ["rock", "paper", "scissors"]
+
+print("🤖 Welcome to Rock, Paper, Scissors AI! 🤖")
+
+play_again = "yes"
+
+while play_again == "yes":
+
+    player = input("\nChoose rock, paper, or scissors: ").lower()
+
+    if player not in moves:
+        print("❌ Invalid choice!")
+        continue
+
+    # AI "thinking" animation
+    print("\n🤖 AI is thinking", end="")
+    for i in range(3):
+        time.sleep(0.7)
+        print(".", end="", flush=True)
+
+    print()
+
+    # AI picks a move
+    ai = random.choice(moves)
+
+    print(f"\n🧑 You chose: {player}")
+    print(f"🤖 AI chose: {ai}")
+
+    # Determine the winner
+    if player == ai:
+        print("🤝 It's a tie!")
+
+    elif (
+        (player == "rock" and ai == "scissors") or
+        (player == "paper" and ai == "rock") or
+        (player == "scissors" and ai == "paper")
+    ):
+        print("🎉 You win!")
+
+    else:
+        print("🤖 AI wins!")
+
+    # Ask to play again
+    play_again = input("\n🔄 Play again? (yes/no): ").lower()
+
+print("\n👋 Thanks for playing!")
