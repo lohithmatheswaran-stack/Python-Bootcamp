@@ -1,0 +1,78 @@
+import random
+
+# List of 6-letter words
+words = [
+    "pirate", "castle", "dragon",
+    "forest", "planet", "rocket",
+    "silver", "throne", "bridge"
+]
+
+# Clues for each word
+clues = {
+    "pirate": "Sailed the seas looking for treasure.",
+    "castle": "A king or queen might live here.",
+    "dragon": "A mythical creature that breathes fire.",
+    "forest": "A large area filled with trees.",
+    "planet": "Earth is one of these.",
+    "rocket": "Used to travel into space.",
+    "silver": "A shiny precious metal.",
+    "throne": "A royal seat.",
+    "bridge": "Helps people cross rivers."
+}
+
+# Computer chooses a random word
+secret_word = random.choice(words)
+
+lives = 6
+guessed_words = []
+
+print("Welcome to Treasure Wordle!")
+print("Guess the secret 6-letter word.")
+print("You have 6 lives.\n")
+
+while lives > 0:
+
+    print(f"\nLives Remaining: {lives}")
+
+    guess = input("Enter a 6-letter word: ").lower()
+
+    if len(guess) != 6:
+        print(" Word must be exactly 6 letters!")
+        continue
+
+    guessed_words.append(guess)
+
+    # Player wins
+    if guess == secret_word:
+        print(f"\n You found the treasure! The word was '{secret_word}'!")
+        break
+
+    result = ""
+
+    # Check each letter
+    for i in range(6):
+
+        if guess[i] == secret_word[i]:
+            result += "🟩"
+
+        elif guess[i] in secret_word:
+            result += "🟨"
+
+        else:
+            result += "🟥"
+
+    print("Result:", result)
+
+    lives -= 1
+
+    # Special clue after first wrong guess (5 lives left)
+    if lives == 5:
+        print("\n Treasure Map Clue!")
+        print(clues[secret_word])
+
+    # Show guessed words
+    print("Previous guesses:", guessed_words)
+
+# Player loses
+if lives == 0:
+    print(f"\n Game Over! The treasure word was '{secret_word}'.")
