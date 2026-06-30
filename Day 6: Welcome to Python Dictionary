@@ -1,0 +1,52 @@
+python_guide = {
+    "welcome": "Welcome to Python!",
+
+    "vocab": {
+        "variable": "Stores data in a program.",
+        "string": "Text enclosed in quotes.",
+        "integer": "A whole number.",
+        "float": "A number with a decimal.",
+        "list": "A collection of items in square brackets [].",
+        "dictionary": "A collection of key-value pairs.",
+        "function": "A reusable block of code.",
+        "loop": "Repeats code multiple times.",
+        "conditional": "Makes decisions using if, elif, and else.",
+        "boolean": "A value that is either True or False."
+    },
+
+    "quiz": {
+        "What data type stores text?": "string",
+        "What keyword starts a conditional statement?": "if",
+        "What data type uses key-value pairs?": "dictionary",
+        "What loop repeats while a condition is True?": "while",
+        "What are the two Boolean values?": "true and false"
+    }
+}
+
+print(python_guide["welcome"])
+
+print("\n=== Important Python Vocabulary ===")
+for word, definition in python_guide["vocab"].items():
+    print(f"{word.title()}: {definition}")
+
+print("\n=== Quiz Time! ===")
+
+score = 0
+
+for question, answer in python_guide["quiz"].items():
+    user_answer = input(f"\n{question}\n> ").strip().lower()
+
+    if user_answer == answer:
+        print("✅ Correct!")
+        score += 1
+    else:
+        print(f"❌ Incorrect. The answer is: {answer}")
+
+print(f"\nYou scored {score}/{len(python_guide['quiz'])}!")
+
+if score == len(python_guide["quiz"]):
+    print("🏆 Perfect score! You're a Python pro!")
+elif score >= 3:
+    print("👍 Great job! Keep practicing.")
+else:
+    print("📚 Review the vocabulary and try again!")
