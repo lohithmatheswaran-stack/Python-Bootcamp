@@ -1,0 +1,91 @@
+# ==============================
+# Marvel Quiz (OOP Version)
+# ==============================
+
+class Question:
+    """Represents one quiz question."""
+
+    def __init__(self, question, options, answer):
+        self.question = question
+        self.options = options
+        self.answer = answer.upper()
+
+    def ask_question(self):
+        print("\n" + self.question)
+
+        for option in self.options:
+            print(option)
+
+        guess = input("Your answer (A, B, C, D): ").upper()
+
+        if guess == self.answer:
+            print("✅ Correct!")
+            return True
+        else:
+            print(f"❌ Incorrect! The correct answer was {self.answer}.")
+            return False
+
+
+class MarvelQuiz:
+    """Controls the entire quiz."""
+
+    def __init__(self):
+        self.score = 0
+        self.questions = [
+            Question(
+                "1. Who is known as the God of Thunder?",
+                ["A. Loki", "B. Thor", "C. Iron Man", "D. Hulk"],
+                "B"
+            ),
+
+            Question(
+                "2. What is Captain America's shield made of?",
+                ["A. Steel", "B. Adamantium", "C. Vibranium", "D. Titanium"],
+                "C"
+            ),
+
+            Question(
+                "3. What is Iron Man's real name?",
+                ["A. Bruce Banner", "B. Tony Stark", "C. Steve Rogers", "D. Clint Barton"],
+                "B"
+            ),
+
+            Question(
+                "4. Which Infinity Stone is found in the Tesseract?",
+                ["A. Time Stone", "B. Soul Stone", "C. Reality Stone", "D. Space Stone"],
+                "D"
+            ),
+
+            Question(
+                "5. What is Black Panther's home country?",
+                ["A. Sokovia", "B. Wakanda", "C. Asgard", "D. Latveria"],
+                "B"
+            )
+        ]
+
+    def start(self):
+        print("=" * 40)
+        print("🦸 Welcome to the Marvel Quiz!")
+        print("=" * 40)
+
+        for question in self.questions:
+            if question.ask_question():
+                self.score += 1
+
+        self.show_results()
+
+    def show_results(self):
+        print("\n" + "=" * 40)
+        print("Quiz Finished!")
+        print(f"Final Score: {self.score}/{len(self.questions)}")
+
+        percent = (self.score / len(self.questions)) * 100
+        print(f"You scored {percent:.0f}%")
+
+       
+# --------------------
+# Main Program
+# --------------------
+
+quiz = MarvelQuiz()
+quiz.start()
