@@ -1,0 +1,95 @@
+print("Fire, Water, Grass, Electric, Ground, Flying, Rock, Ice")
+#Using research and my pokemon knowledge, these are the weakness and strenghts of pokemon types#
+type_chart = {
+    "Fire": {
+        "strong": ["Grass", "Ice"],
+        "weak": ["Water", "Ground", "Rock"]
+    },
+
+    "Water": {
+        "strong": ["Fire", "Ground", "Rock"],
+        "weak": ["Electric", "Grass"]
+    },
+
+    "Grass": {
+        "strong": ["Water", "Ground", "Rock"],
+        "weak": ["Fire", "Flying", "Ice"]
+    },
+
+    "Electric": {
+        "strong": ["Water", "Flying"],
+        "weak": ["Ground"]
+    },
+
+    "Ground": {
+        "strong": ["Electric", "Fire", "Rock"],
+        "weak": ["Water", "Grass", "Ice"]
+    },
+
+    "Flying": {
+        "strong": ["Grass"],
+        "weak": ["Electric", "Rock", "Ice"]
+    },
+
+    "Rock": {
+        "strong": ["Fire", "Flying", "Ice"],
+        "weak": ["Water", "Grass", "Ground"]
+    },
+
+    "Ice": {
+        "strong": ["Grass", "Ground", "Flying"],
+        "weak": ["Fire", "Rock"]
+    }
+}
+
+import random
+#Now we calculate win probability bewteen the 2 types depwending on the research#
+def calculate_probability(type1, type2):
+    # Start with an even chance, so no weakness or strengths
+    type1_chance = 50
+    type2_chance = 50
+    # need to decrease and increase both to keep it even
+    # Check type1's strengths and weaknesses 
+    if type2 in type_chart[type1]["strong"]:
+        type1_chance += 30
+        type2_chance -= 30
+
+    if type2 in type_chart[type1]["weak"]:
+        type1_chance -= 30
+        type2_chance += 30
+
+    # Check type2's strengths and weaknesses
+    if type1 in type_chart[type2]["strong"]:
+        type2_chance += 30
+        type1_chance -= 30
+
+    if type1 in type_chart[type2]["weak"]:
+        type2_chance -= 30
+        type1_chance += 30
+
+    return type1_chance, type2_chance
+
+
+def battle(type1, type2):
+    chance1, chance2 = calculate_probability(type1, type2)
+
+    print(f"\n {type1} VS {type2}")
+    print("-" * 25)
+    print(f"{type1}: {chance1}% chance to win")
+    print(f"{type2}: {chance2}% chance to win")
+
+    roll = random.randint(1, 100)
+
+    print(f"\n Random Roll: {roll}")
+
+    if roll <= chance1:
+        print(f" {type1} Wins!")
+    else:
+        print(f" {type2} Wins!")
+
+# 1. Ask the user for inputs
+user_type1 = input("Enter the first type: ")
+user_type2 = input("Enter the second type: ")
+
+# 2. Pass the user's inputs into the function
+battle(user_type1, user_type2)
