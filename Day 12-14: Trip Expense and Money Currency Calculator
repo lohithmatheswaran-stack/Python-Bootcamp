@@ -1,0 +1,112 @@
+def currency_calculator():
+#Firstly, pick 5 major curriences, and transform it into a list#
+    currencies = {
+        "USD": "United States Dollar ($)",
+        "EUR": "Euro (€)",
+        "GBP": "British Pound Sterling (£)",
+        "JPY": "Japanese Yen (¥)",
+        "CAD": "Canadian Dollar (CA$)"
+    }
+    
+#Now we obviously need the rates so, type the rates for teh 5 currencies#  
+    rates_to_usd = {
+        "USD": 1.0,
+        "EUR": 0.92,
+        "GBP": 0.79,
+        "JPY": 155.50,
+        "CAD": 1.37
+    }
+#This is to print the title of teh Currency Calculator and and lines to keep it clean#
+    print("--- 5 Major Countries Currency Calculator ---")
+    for code, name in currencies.items():
+        print(f"[{code}] {name}")
+    print("---------------------------------------------")
+#Now for input number 1 --> we need to know what the user has, so we ask and if it is not part of the 5 curriencies, we say error#
+    from_curr = input("Enter the currency code you HAVE (e.g., USD): ").upper()
+    if from_curr not in currencies:
+        print("Invalid currency selection. Please restart and pick from the list.")
+        return
+#now we ask for want the user wants, and simmilarly, it will give an error if it is invalid#
+    to_curr = input("Enter the currency code you WANT (e.g., EUR): ").upper()
+    if to_curr not in currencies:
+        print("Invalid currency selection. Please restart and pick from the list.")
+        return
+#Next we ask for how much money the user and if it is under 10 dollars, we call them broke#
+    try:
+        amount = float(input(f"Enter the amount in {from_curr}: "))
+    except ValueError:
+        print("Please enter a valid numeric amount.")
+        return
+    if 1.0 <= amount <= 10.0:
+        print("\nYou're broke, next person.\n")
+        return
+ #Now the real calulator just divides the amount with the rate and the next line calculates your final amount by multiplying your money (converted into USD) by the target country's exchange rate.#  
+ #As the forumla is Starting Amount × Exchange Rate = New Amount#
+    amount_in_usd = amount / rates_to_usd[from_curr]
+    converted_amount = amount_in_usd * rates_to_usd[to_curr]
+#Now we just print the result and bam#
+    print("\n--- Result ---")
+    print(f"{amount:,.2f} {from_curr} = {converted_amount:,.2f} {to_curr}")
+    print("--------------")
+#This line of code checks whether the Python script is being run directly by the user or being imported into another script as a module
+#It is needed because it prevents code from accidentally running when you import one Python file into another, ensuring the script 
+#only executes its main function when you run that specific file directly.
+if __name__ == "__main__":
+    currency_calculator()
+
+# Trip Expense Tracker, so teh user can calcultate how make of that money can be divided on the trip
+#title
+def main():
+    print("--- Travel Expense Tracker ---")
+    print("Enter the amount spent for each travel category (numbers only).\n")
+# 5 categories for tehtrip  and put in a list#
+    categories = [
+        "Flights & Transport", 
+        "Accommodation (Hotel/Airbnb)", 
+        "Food & Dining", 
+        "Activities & Excursions", 
+        "Souvenirs & Shopping"
+    ]
+    expenses = {}
+#this line creates an empty dictionary.
+#as the for loop runs, the program uses it to pair each travel category (the label) with the amount of money you spent (the value), 
+#and is able to create teh table
+#Loop set up, for each category do this 
+    for category in categories:
+#This creates a loop that will run forever (True is always true) unless it is explicitly told to stop.
+        while True:
+#Jsut saying: "I will handle the error down below in the except section"
+            try:
+#Asking each category how much he/she spends on (input)                
+                user_input = input(f"How much did you spend on {category}? $")
+                # Convert input to float, default to 0.0 if empty
+                amount = float(user_input) if user_input.strip() != "" else 0.0
+#these are the execpt sections and if it negative --> asks for a postive and if it isn't even a number --> asks for a number 
+                if amount < 0:
+                    print("Please enter a positive number.")
+                    continue
+                expenses[category] = amount
+#It pairs the current category name with the dollar amount
+                break
+            except ValueError:
+                print("Invalid input. Please enter a valid number (e.g., 45.00).")
+#This is a built-in Python function that adds all those numbers together.
+    total_spent = sum(expenses.values())
+#Now the actual table
+    print("\n=============================================")
+    print(f"{'Trip Category':<30} | {'Amount':<8}")
+    print("---------------------------------------------")
+#This line of code loops through each travel category and its cost, 
+#printing them side-by-side in a neatly aligned table row with two decimal places for the dollar amount. 
+#30 (Column Width) and 7.2 (Number Formatting): it reserves a total space of 7 characters for the entire number  
+    for category, amount in expenses.items():
+        print(f"{category:<30} | ${amount:>7.2f}")
+# finally prints the trip costs and bam        
+    print("---------------------------------------------")
+    print(f"{'TOTAL TRIP COST':<30} | ${total_spent:>7.2f}")
+    print("=============================================")
+
+if __name__ == "__main__":
+    main()
+
+#Docmentation: https://docs.google.com/document/d/1w68MdKGXjaMJh4OiPV1qt38DgQuI2H_yFZ1RlQx-574/edit?tab=t.0 
