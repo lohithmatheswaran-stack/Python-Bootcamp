@@ -1,0 +1,27 @@
+# A dictionary-based mail organizer grouped by categories
+# First set up the list, with categories, to add do "____": [],
+mail_box = {"work": [], "personal": [], "bills": [], "other": []}
+#next we need an input, and this inpu allows people add, check, or exit the application
+while True:
+    action = input("Type 'add' to store mail, 'check' to view a category, or 'exit': ").strip().lower()
+#The .strip() method in Python removes leading and trailing whitespace characters (like spaces, tabs \t, and newlines \n)    
+    if action == 'add':
+# 1st action item is add, and it asks the user to store a string using .append, whichs des the adding 
+        category = input("Enter category (Work, Personal, Bills, Other): ").strip().lower()
+        if category in mail_box:
+            mail_box[category].append(input("Enter the mail item details: "))
+        else:
+# worst case scene, prints unknown cat.  and tries again 
+            print("Unknown category. Saving to 'Other'.")
+            mail_box["other"].append(input("Enter the mail item details: "))
+
+    elif action == 'check':
+        category = input("Which category do you want to check? ").strip().lower()
+        if category in mail_box:
+            print(f"\n--- {category.upper()} MAIL ---")
+            for i, item in enumerate(mail_box[category], 1): print(f"{i}. {item}")
+        else:
+            print("Category not found.")
+            
+    elif action == 'exit':
+        break
